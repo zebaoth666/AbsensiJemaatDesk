@@ -1,0 +1,11 @@
+D:\Project\dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\AbsensiJemaatDesk\bin\Debug\AbsensiJemaatDesk.exe.config
+D:\Project\dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\AbsensiJemaatDesk\bin\Debug\AbsensiJemaatDesk.exe
+D:\Project\dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\AbsensiJemaatDesk\bin\Debug\AbsensiJemaatDesk.pdb
+D:\Project\dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\AbsensiJemaatDesk\bin\Debug\AbsensiJemaatDesk.xml
+D:\Project\dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\AbsensiJemaatDesk\obj\Debug\AbsensiJemaatDesk.Resources.resources
+D:\Project\dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\AbsensiJemaatDesk\obj\Debug\AbsensiJemaatDesk.vbproj.GenerateResource.Cache
+D:\Project\dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\AbsensiJemaatDesk\obj\Debug\AbsensiJemaatDesk.exe
+D:\Project\dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\AbsensiJemaatDesk\obj\Debug\AbsensiJemaatDesk.xml
+D:\Project\dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\AbsensiJemaatDesk\obj\Debug\AbsensiJemaatDesk.pdb
+D:\Project\dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\AbsensiJemaatDesk\obj\Debug\AbsensiJemaatDesk.frmIndex.resources
+D:\Project\dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\AbsensiJemaatDesk\obj\Debug\AbsensiJemaatDesk.frmLogin.resources

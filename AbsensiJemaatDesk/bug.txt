@@ -1,0 +1,4 @@
+Update & Delete pada kategori barang
+-> cek dulu data barang yg attached ke kategori brg tsb dan liat stok nya, munculin data brg plus sisa stock nya...
+update & delete pada barang
+-> tampilin sisa stock barang yg ada
