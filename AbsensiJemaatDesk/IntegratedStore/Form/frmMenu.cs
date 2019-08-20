@@ -91,14 +91,20 @@ namespace AbsensiJemaatDesk
 
         private void absenJemaatToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            rptBirthday birth = new rptBirthday();
-            birth.ShowDialog();
+            if (AbsensiJemaatDesk.Properties.Settings.Default.mdiParent == false)
+            {
+                rptBirthday birth = new rptBirthday();
+                birth.ShowDialog();
+            }
         }
 
         private void absenKebaktianToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            rptPD pd = new rptPD();
-            pd.ShowDialog();
+            if (AbsensiJemaatDesk.Properties.Settings.Default.mdiParent == false)
+            {
+                rptPD pd = new rptPD();
+                pd.ShowDialog();
+            }
         }
 
         private void grafikKehadiranJemaatToolStripMenuItem_Click(object sender, EventArgs e)

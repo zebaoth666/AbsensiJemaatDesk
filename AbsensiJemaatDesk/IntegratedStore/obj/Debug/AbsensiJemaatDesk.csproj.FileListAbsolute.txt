@@ -16,6 +16,8 @@ D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\AbsensiJemaatDesk\bin\Debu
 D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\AbsensiJemaatDesk\bin\Debug\AbsensiJemaatDesk.exe.config
 D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\AbsensiJemaatDesk\bin\Debug\AbsensiJemaatDesk.exe
 D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\AbsensiJemaatDesk\bin\Debug\AbsensiJemaatDesk.pdb
+D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.rptUmatGraph.resources
+D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.rptPD.resources
 D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.rptBirthday.resources
 D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.frmNewUmat.resources
 D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.frmUmat.resources
@@ -27,13 +29,11 @@ D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\
 D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.frmLogin.resources
 D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.frmMenu.resources
 D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.Properties.Resources.resources
+D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.xRptUmatGraph.resources
+D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.xRptPD.resources
+D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.xRptBirthday.resources
 D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.csproj.GenerateResource.Cache
 D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.exe.licenses
 D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.exe
 D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.pdb
-D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.xRptBirthday.resources
-D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.rptPD.resources
-D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.xRptPD.resources
-D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.xRptUmatGraph.resources
-D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.rptUmatGraph.resources
 D:\Project\Dotnet\AbsensiJemaatDesk\AbsensiJemaatDesk\IntegratedStore\obj\Debug\AbsensiJemaatDesk.csprojResolveAssemblyReference.cache

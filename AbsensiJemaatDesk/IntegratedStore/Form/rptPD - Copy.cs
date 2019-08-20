@@ -11,27 +11,22 @@ using DevExpress.XtraReports.UI;
 
 namespace AbsensiJemaatDesk
 {
-    public partial class rptBirthday : Form
+    public partial class rptPD : Form
     {
+        pdClass pd;
         DataTable dt;
-        
-        public rptBirthday()
+
+        public rptPD()
         {
             InitializeComponent();
+
+            dt = new DataTable();
+            pd = new pdClass();
         }
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
             panelHeader.BackColor = ColorTranslator.FromHtml("#58D3F7");
-
-            this.dtDari.LostFocus += new EventHandler(this.dtDari_LostFocus);
-
-            dtDari.Value = DateTime.Now;
-            dtSampai.Value = dtDari.Value.AddDays(7);
-        }
-
-        private void dtDari_LostFocus(object sender, EventArgs e) {
-            dtSampai.Value = dtDari.Value.AddDays(7);
         }
 
         private void btnTutup_Click(object sender, EventArgs e)
@@ -43,10 +38,7 @@ namespace AbsensiJemaatDesk
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-            xRptBirthday rpt = new xRptBirthday(dtDari.Value.ToString("dd"), dtSampai.Value.ToString("dd"), 
-                                                dtDari.Value.ToString("MM"), dtSampai.Value.ToString("MM"));
-            rpt.setBulan(dtDari.Value.ToString("dd"), dtSampai.Value.ToString("dd"),
-                                                dtDari.Value.ToString("MM"), dtSampai.Value.ToString("MM"));
+            xRptPD rpt = new xRptPD(dtPD.Value.Year.ToString(), dtPD.Value.Month.ToString(), dtPD.Value.Day.ToString());
             rpt.ShowPreviewDialog();
         }
     }

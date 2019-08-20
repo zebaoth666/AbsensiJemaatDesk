@@ -267,7 +267,7 @@
             this.lblBulan.LocationFloat = new DevExpress.Utils.PointFloat(2.083333F, 74.28835F);
             this.lblBulan.Name = "lblBulan";
             this.lblBulan.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.lblBulan.SizeF = new System.Drawing.SizeF(150.5F, 24.04166F);
+            this.lblBulan.SizeF = new System.Drawing.SizeF(648F, 24.04166F);
             this.lblBulan.StylePriority.UseFont = false;
             this.lblBulan.StylePriority.UseTextAlignment = false;
             this.lblBulan.Text = "lblBulan";

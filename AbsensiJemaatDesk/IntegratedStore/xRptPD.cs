@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Drawing;
+using System.Drawing.Printing;
 using System.Collections;
 using System.ComponentModel;
 using DevExpress.XtraReports.UI;
@@ -39,15 +39,15 @@ namespace AbsensiJemaatDesk
 
             if (dt.Rows.Count > 0) {
                 DataRow dr;
-                for (int a = 0; a < dt.Rows.Count - 1; a++) {
+                for (int a = 0; a <= dt.Rows.Count - 1; a++) {
                     dr = dtPD.NewRow();
-                    dr[0] = dt.Rows[a][0].ToString();
-                    dr[1] = dt.Rows[a][1].ToString();
-                    dr[2] = dt.Rows[a][2].ToString();
+                    dr[0] = DateTime.Parse(dt.Rows[a][0].ToString()).ToString("dd/MM/yyyy");
+                    dr[1] = dt.Rows[a][2].ToString();
+                    dr[2] = dt.Rows[a][1].ToString();
                     dr[3] = dt.Rows[a][3].ToString();
                     dr[4] = dt.Rows[a][4].ToString();
-                    dr[6] = dt.Rows[a][6].ToString();
-                    dr[5] = dt.Rows[a][5].ToString() + ", " + String.Format("{0:d/M/yyyy}", dr[6]);
+                    dr[6] = DateTime.Parse(dt.Rows[a][6].ToString()).ToString("dd/MM/yyyy");      //Field ini sbnrnya ga butuh, tp just in case aja. Jd di-keep
+                    dr[5] = dt.Rows[a][5].ToString() + ", " + String.Format("{0:d/MM/yyyy}", dr[6]);
                     dr[7] = dt.Rows[a][7].ToString();
 
                     if (dt.Rows[a][8].ToString() == "P")
@@ -61,8 +61,31 @@ namespace AbsensiJemaatDesk
                     }else { dr[9] = "Tidak"; }
                     
                     dtPD.Rows.Add(dr);
+
+                    String tglLahir = dr[6].ToString();
+                    String tglAwal = dr[0].ToString();
+
+                    //if (compareDate(DateTime.Parse(tglAwal.Substring(0, 6) + DateTime.Now.Year),
+                    //            DateTime.Parse(tglLahir.Substring(0, 6) + DateTime.Now.Year)) == true)
+                    //{
+                    //    xrLabel4.BackColor = Color.GreenYellow;
+                        
+                    //}
+                    //else {
+                    //    xrLabel4.BackColor = Color.Blue;
+                    //}
                 }
             }
+        }
+
+        private Boolean compareDate(DateTime tglAwal, DateTime tglLahir) {
+            DateTime tglAkhir = tglAwal.AddDays(7);
+
+            if (tglAwal <= tglLahir && tglAkhir >= tglLahir)
+            {
+                return true;
+            }
+            else return false;
         }
     }
 }

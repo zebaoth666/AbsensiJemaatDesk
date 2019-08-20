@@ -123,4 +123,44 @@
   <metadata name="dataSet1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 56</value>
   </metadata>
+  <data name="$this.ScriptsSource" xml:space="preserve">
+    <value>
+private void xrLabel4_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e) {
+	XRLabel label = (XRLabel)sender;
+	XRControl control = this.FindControl("xrLabel15", true);
+
+//	String gender = Convert.ToString(GetCurrentColumnValue("umatCompName"));
+
+	
+
+//	if (gender == "Nikholaus Sanjaya"){
+//		control.BackColor = Color.Azure;
+//		control.Text = GetCurrentColumnValue("PD_UMAT_COMP_NAME").ToString();
+//	}else{
+//		control.BackColor = Color.Brown;
+//		control.Text = GetCurrentColumnValue("PD_UMAT_COMP_NAME").ToString();
+//	}
+}
+
+private void DetailReport_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e){
+//	DetailBand detail = (DetailBand)sender;
+
+//	DateTime dtAwal = Convert.ToDateTime(GetCurrentColumnValue("PD_DATE"));	
+//	DateTime dtLahir = Convert.ToDateTime(GetCurrentColumnValue("PD_UMAT_BORN_DATE"));
+
+//	if (dtAwal == dtLahir){
+//		detail.BackColor = Color.Red;
+//	}else {
+//		detail.BackColor = Color.Blue;
+//	}
+
+	String gender = GetCurrentColumnValue("umatCompName").ToString();
+	
+	if (gender == "Nikholaus Sanjaya"){
+		xrLabel4.Text = gender;	}
+	else{
+		xrLabel4.Text = gender;
+	}
+}</value>
+  </data>
 </root>

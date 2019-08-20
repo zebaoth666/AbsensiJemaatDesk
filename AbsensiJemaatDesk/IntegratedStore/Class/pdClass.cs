@@ -16,6 +16,7 @@ namespace AbsensiJemaatDesk
         private String pdPewarta = string.Empty;
         private String pdTema = string.Empty;
         private Int16 pdNextNo = 0;
+        private Double pdTotal = 0;
 
         OleDbTransaction trans = null;
         private OleDbConnection conn = null;
@@ -41,21 +42,23 @@ namespace AbsensiJemaatDesk
         {
             return this.pdPewarta;
         }
+
+        public Double getTotal() {
+            return this.pdTotal;
+        }
         
-        public String checkService()
+        public String checkService(String tahun, String bulan, String tanggal)
         {
             string status = string.Empty;
 
             try
             {
-                DateTimePicker dt = new DateTimePicker();
-
                 conn.Open();
                 comm.Connection = conn;
                 comm.CommandText = "SELECT PD_HEADER_ID, PD_TITLE, PD_SPEAKER, PD_NEXT_NO FROM T_PD_HEADERS" +
-                                    " WHERE YEAR(PD_DATE)='" + dt.Value.Year.ToString() + 
-                                    "' AND MONTH(PD_DATE)='" + dt.Value.Month.ToString() + 
-                                    "' AND DAY(PD_DATE)='" + dt.Value.Day.ToString() + "'";
+                                    " WHERE YEAR(PD_DATE)='" + tahun + 
+                                    "' AND MONTH(PD_DATE)='" + bulan + 
+                                    "' AND DAY(PD_DATE)='" + tanggal + "'";
                 comm.CommandTimeout = 10000;
                 sdr = comm.ExecuteReader();
                 if (sdr.HasRows)
@@ -67,21 +70,21 @@ namespace AbsensiJemaatDesk
 
                     sdr.Close();
                     conn.Close();
+
+                    status = "EDIT";
                 }
                 else
                 {
                     sdr.Close();
                     conn.Close();
 
-                    nextNo();
-                    this.pdHeaderId = getMaxNo();
-                    savePD(this.pdHeaderId);
+                    status = "NEW";
                 }
-
-                status = "GOOD";
             }
             catch (SystemException err)
             {
+                sdr.Close();
+                conn.Close();
                 status = "ERR";
                 iMessage.erBoxOk(err.Message);
             }
@@ -89,6 +92,7 @@ namespace AbsensiJemaatDesk
             return status;
         }
 
+        // not used since 25 July 2019
         private void nextNo()
         {
             Int16 next = 0;
@@ -123,7 +127,8 @@ namespace AbsensiJemaatDesk
             this.pdNextNo=next;
         }
 
-        private void savePD(String maxNo) {
+        public Boolean savePD(String header_id, String tgl, String tema, String pewarta) {
+            bool hasil = false;
             try
             {
                 conn.Open();
@@ -133,8 +138,8 @@ namespace AbsensiJemaatDesk
 
                 comm.CommandText = "INSERT INTO T_PD_HEADERS(PD_HEADER_ID, PD_DATE, PD_TYPE, PD_TITLE, PD_SPEAKER," + 
                                                     " PD_NEXT_NO, CREATE_DATE, CREATE_BY, MOD_DATE, MOD_BY) VALUES(" +
-                                                    "'" + maxNo + "',NOW(),'YOUTH SATURDAY SERVICE','','','" + 
-                                                    (pdNextNo + 1) + "',NOW(),'" +
+                                                    "'" + header_id + "','" + tgl + "','YOUTH SATURDAY SERVICE','" + tema +
+                                                    "','" + pewarta + "','0',NOW(),'" +
                                                     AbsensiJemaatDesk.Properties.Settings.Default.userName +
                                                     "', NOW(), '" + AbsensiJemaatDesk.Properties.Settings.Default.userName + "')";
                 comm.CommandTimeout = 10000;
@@ -144,7 +149,7 @@ namespace AbsensiJemaatDesk
                                     " PD_UMAT_ALIAS_NAME, PD_UMAT_BORN_PLACE, PD_UMAT_BORN_DATE," + 
                                     " PD_UMAT_PHONE, PD_UMAT_SEX, PD_PRESENT_FLAG," +
                                     " CREATE_DATE, CREATE_BY, MOD_DATE, MOD_BY) SELECT " +
-                                    "'" + maxNo + "', UMAT_ID, UMAT_COMP_NAME, UMAT_ALIAS_NAME," +
+                                    "'" + header_id + "', UMAT_ID, UMAT_COMP_NAME, UMAT_ALIAS_NAME," +
                                     " UMAT_PLACE_BIRTH, UMAT_DATE_BIRTH, UMAT_PHONE, UMAT_SEX, '0', NOW(),'" +
                                     AbsensiJemaatDesk.Properties.Settings.Default.userName +
                                     "', NOW(), '" + AbsensiJemaatDesk.Properties.Settings.Default.userName + 
@@ -153,13 +158,18 @@ namespace AbsensiJemaatDesk
                 comm.ExecuteNonQuery();
 
                 trans.Commit();
+                this.pdHeaderId = header_id;
+                hasil = true;
             }
             catch (SystemException err)
             {
                 trans.Rollback();
+                hasil = false;
                 iMessage.erBoxOk(err.Message);
             }
             finally { conn.Close(); }
+
+            return hasil;
         }
 
         public Boolean editHeader(String headerId, String tema, String pewarta) {
@@ -290,8 +300,11 @@ namespace AbsensiJemaatDesk
                         if (dt.Rows[a][9].ToString() == "1")
                         {
                             dr[9] = true;
+                            pdTotal = pdTotal + 1;
                         }
-                        else { dr[9] = false; }
+                        else {
+                            dr[9] = false;
+                        }
 
                         dt1.Rows.Add(dr);
                     }
@@ -306,6 +319,7 @@ namespace AbsensiJemaatDesk
             
         }
 
+        // not use since 25 July 2019
         private String getMaxNo()
         {
             string maxNo = string.Empty;
@@ -333,8 +347,9 @@ namespace AbsensiJemaatDesk
         public DataTable callRptPD(string fields, String param, String order) {
             DataTable dt = new DataTable();
 
+            String dParam = " WHERE PD_PRESENT_FLAG='1' ";
             if (String.IsNullOrEmpty(fields)) { fields = "*"; }
-            if (!String.IsNullOrEmpty(param)) { param = " WHERE " + param; }
+            if (!String.IsNullOrEmpty(param)) { param = dParam + " AND " + param; }
             if (!String.IsNullOrEmpty(order)) { order = " ORDER BY " + order; }
 
             try

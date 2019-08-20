@@ -16,6 +16,8 @@ namespace AbsensiJemaatDesk
         private String headerId = string.Empty;
         private String statusPD = string.Empty;
         private Boolean editMode = false;
+        private Boolean headerSave = false;
+        private Double pdTotal = 0;
         private DataTable dt;
         private DataView dv;
         private DataRow dr;
@@ -32,58 +34,94 @@ namespace AbsensiJemaatDesk
             pd = new pdClass();
             dt = new DataTable();
             dv = new DataView();
+            LblMenu.Text = "PERSEKUTUAN DOA";
 
             LblMenu.BackColor = ColorTranslator.FromHtml("#58D3F7");
             this.VisibleChanged += new EventHandler(this.frmKebaktian_VisibleChanged);
             this.dgvUmat.CurrentCellDirtyStateChanged += new EventHandler(this.dgvUmat_CurrentCellDirtyStateChanged);
             this.txtCari.TextChanged += new EventHandler(this.txtCari_TextChanged);
+            this.tabControl1.SelectedIndexChanged += new EventHandler(this.tabControl1_SelectionIndexChanged);
+            this.dtKebaktian.LostFocus += new EventHandler(this.dtKebaktian_LostFocus);
 
             initiateDT();
         }
 
         private void frmKebaktian_VisibleChanged(object sender, EventArgs e) {
             if (this.Visible == true) {
-                LblMenu.Text = "PERSEKUTUAN DOA " + DateTime.Now.ToString("dd-MM-yyyy");
+                dtKebaktian.Value = DateTime.Now;
+                txtPewarta.Text = string.Empty;
+                txtTema.Text = string.Empty;
+                dt.Clear();
 
-                if (pd.checkService() == "GOOD")
-                {
-                    headerId = pd.getHeaderId();
-                    txtPewarta.Text = pd.getPewarta();
-                    txtTema.Text = pd.getTitle();
+                headerId = string.Empty;
+                statusPD = string.Empty;
+                editMode = false;
+                headerSave = false;
 
-                    getData();
-                }
-                else {
-                    pnlTitle.Enabled = false;
-                    pnlBody.Enabled = false;
-                    btnUbah.Enabled = false;
-                    btnBaru.Enabled = false;
-                    iMessage.erBoxOk("Terjadi kesalahan sistem. Silakan hubungi Administrator Anda");
-                }
+                dtKebaktian.Enabled = true;
+                dtKebaktian.Focus();
             }
+        }
+
+        private void tabControl1_SelectionIndexChanged(object sender, EventArgs e) {
+            if (headerSave == false && tabControl1.SelectedIndex == 1) {
+                tabControl1.SelectedIndex = 0;
+            }
+        }
+
+        private void dtKebaktian_LostFocus(object sender, EventArgs e) {
+            if (pd.checkService(dtKebaktian.Value.Year.ToString(), dtKebaktian.Value.Month.ToString(), dtKebaktian.Value.Day.ToString()) == "EDIT")
+            {
+                editMode = true;
+                headerId = pd.getHeaderId();
+                txtPewarta.Text = pd.getPewarta();
+                txtTema.Text = pd.getTitle();
+
+                getData();
+            }
+            else if (pd.checkService(dtKebaktian.Value.Year.ToString(), dtKebaktian.Value.Month.ToString(), dtKebaktian.Value.Day.ToString()) == "NEW")
+            {
+                editMode = false;
+                txtPewarta.Text = string.Empty;
+                txtTema.Text = string.Empty;
+                dt.Clear();
+                dgvUmat.DataSource = null;
+                dgvUmat.Rows.Clear();
+            }
+            else
+            {
+                btnSimpan.Enabled = false;
+                iMessage.erBoxOk("Terjadi kesalahan sistem. Silakan hubungi Administrator Anda");
+            }
+            dtKebaktian.Enabled = false;
         }
 
         private void dgvUmat_CurrentCellDirtyStateChanged(object sender, EventArgs e) {
             if (dgvUmat.Rows.Count > 0)
             {
-                if (dgvUmat.CurrentRow.Cells[9].Value.Equals(true))
-                {
-                    hadir = "1";
-                }
-                else
-                {
-                    hadir = "0";
-                }
+                if (dgvUmat.IsCurrentCellDirty == false) {
+                    if (dgvUmat.CurrentRow.Cells[9].Value.Equals(true))
+                    {
+                        hadir = "1";
+                        pdTotal = pdTotal + 1;
+                    }
+                    else
+                    {
+                        hadir = "0";
+                        pdTotal = pdTotal - 1;
+                    }
 
-                pd.editLines(dgvUmat.CurrentRow.Cells[0].Value.ToString(), hadir);
+                    lbltotal.Text = "Total Jemaat : " + Convert.ToString(pdTotal);
+                    pd.editLines(dgvUmat.CurrentRow.Cells[0].Value.ToString(), hadir);
+                }
             }
         }
-
+        
         private void txtCari_TextChanged(object sender, EventArgs e) {
             refresh(txtCari.Text);
         }
 
-        private void btnBaru_Click(object sender, EventArgs e)
+        private void btnUmatBaru_Click(object sender, EventArgs e)
         {
             frmNewUmat newUmat = new frmNewUmat(headerId, dt.Rows[dt.Rows.Count - 1][2].ToString());
             newUmat.ShowDialog();
@@ -99,29 +137,6 @@ namespace AbsensiJemaatDesk
             this.Visible = false;
         }
 
-        private void btnUbah_Click(object sender, EventArgs e)
-        {
-            if (editMode == false)
-            {
-                pnlTitle.Enabled = true;
-                pnlBody.Enabled = false;
-                btnBaru.Enabled = false;
-                btnTutup.Enabled = false;
-
-                btnUbah.Text = "Batal";
-                editMode = true;
-            }
-            else {
-                pnlTitle.Enabled = false;
-                pnlBody.Enabled = true;
-                btnBaru.Enabled = true;
-                btnTutup.Enabled = true;
-
-                btnUbah.Text = "Ubah";
-                editMode = false;
-            }
-        }
-
         private void btnSimpan_Click(object sender, EventArgs e)
         {
             if (String.IsNullOrWhiteSpace(txtPewarta.Text) || String.IsNullOrWhiteSpace(txtTema.Text))
@@ -132,23 +147,34 @@ namespace AbsensiJemaatDesk
                 DialogResult result = iMessage.quBoxCon("Simpan Data?");
 
                 if (result == DialogResult.Yes) {
-                    if (pd.editHeader(headerId, txtTema.Text.Trim(), txtPewarta.Text.Trim()) == true)
+                    if (editMode == true)
                     {
-                        iMessage.iBoxOk("Data berhasil diubah");
+                        if (pd.editHeader(dtKebaktian.Value.ToString("yyyyMMdd"), txtTema.Text.Trim(), txtPewarta.Text.Trim()) == true)
+                        {
+                            headerSave = true;
+                            tabControl1.SelectedIndex = 1;
+                        }
+                        else
+                        {
+                            iMessage.iBoxOk("Data gagal diubah");
+                        }
                     }
-                    else
-                    {
-                        iMessage.iBoxOk("Data gagal diubah");
-                    }   
+                    else {
+                        if (pd.savePD(dtKebaktian.Value.ToString("yyyyMMdd"), dtKebaktian.Value.ToShortDateString(),
+                                txtTema.Text.Trim(), txtPewarta.Text.Trim()) == true)
+                        {
+                            getData();
+                            headerSave = true;
+                            tabControl1.SelectedIndex = 1;
+                        }
+                        else {
+                            iMessage.iBoxOk("Data gagal disimpan");
+                        }
+                    }
+
+                    pdTotal = pd.getTotal();
+                    lbltotal.Text = "Total Jemaat : " + Convert.ToString(pdTotal);
                 }
-
-                pnlTitle.Enabled = false;
-                pnlBody.Enabled = true;
-                btnBaru.Enabled = true;
-                btnTutup.Enabled = true;
-
-                btnUbah.Text = "Ubah";
-                editMode = false;
             }
         }
 
@@ -188,7 +214,7 @@ namespace AbsensiJemaatDesk
             if (dt != null)
                 dt.Clear();
 
-            pd.getUmats(headerId, dt);
+            pd.getUmats(pd.getHeaderId(), dt);
 
             refresh(txtCari.Text);
         }

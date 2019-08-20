@@ -54,7 +54,7 @@
     <StartupObject>AbsensiJemaatDesk.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Dollar_icon.ico</ApplicationIcon>
+    <ApplicationIcon>icon %281%29.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <Prefer32Bit>false</Prefer32Bit>
@@ -65,6 +65,7 @@
   <ItemGroup>
     <Reference Include="DevExpress.Charts.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.DataAccess.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Office.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Pdf.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.PivotGrid.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -113,6 +114,12 @@
     <Compile Include="Class\encryptClass.cs" />
     <Compile Include="Class\pdClass.cs" />
     <Compile Include="Class\umatClass.cs" />
+    <Compile Include="Form\rptPD - Copy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\rptPD - Copy.Designer.cs">
+      <DependentUpon>rptPD - Copy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\rptUmatGraph.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -204,6 +211,9 @@
     <Compile Include="xRptBirthday.Designer.cs">
       <DependentUpon>xRptBirthday.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Form\rptPD - Copy.resx">
+      <DependentUpon>rptPD - Copy.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\rptUmatGraph.resx">
       <DependentUpon>rptUmatGraph.cs</DependentUpon>
     </EmbeddedResource>
@@ -278,6 +288,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dollar_icon.ico" />
+    <Content Include="icon %281%29.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
