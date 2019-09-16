@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUmat));
             this.LblMenu = new System.Windows.Forms.Label();
             this.pnlBody = new System.Windows.Forms.Panel();
@@ -193,6 +193,7 @@
             // 
             // cmbSosMed
             // 
+            this.cmbSosMed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSosMed.FormattingEnabled = true;
             this.cmbSosMed.Items.AddRange(new object[] {
             "Facebook",
@@ -289,6 +290,7 @@
             // 
             // cmbAgama
             // 
+            this.cmbAgama.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAgama.FormattingEnabled = true;
             this.cmbAgama.Items.AddRange(new object[] {
             "Buddha",
@@ -694,8 +696,8 @@
             // 
             this.dgvUmat.AllowUserToAddRows = false;
             this.dgvUmat.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.dgvUmat.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.dgvUmat.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvUmat.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvUmat.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvUmat.BorderStyle = System.Windows.Forms.BorderStyle.None;

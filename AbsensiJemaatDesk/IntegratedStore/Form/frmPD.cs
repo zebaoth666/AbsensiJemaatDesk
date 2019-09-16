@@ -23,6 +23,7 @@ namespace AbsensiJemaatDesk
         private DataRow dr;
         private DataGridViewCheckBoxCell cb;
         private String hadir = "0";
+        private Boolean cellEdit = false;
 
         public frmPD()
         {
@@ -70,28 +71,26 @@ namespace AbsensiJemaatDesk
         }
 
         private void dtKebaktian_LostFocus(object sender, EventArgs e) {
-            if (pd.checkService(dtKebaktian.Value.Year.ToString(), dtKebaktian.Value.Month.ToString(), dtKebaktian.Value.Day.ToString()) == "EDIT")
-            {
-                editMode = true;
-                headerId = pd.getHeaderId();
-                txtPewarta.Text = pd.getPewarta();
-                txtTema.Text = pd.getTitle();
-
-                getData();
-            }
-            else if (pd.checkService(dtKebaktian.Value.Year.ToString(), dtKebaktian.Value.Month.ToString(), dtKebaktian.Value.Day.ToString()) == "NEW")
-            {
-                editMode = false;
-                txtPewarta.Text = string.Empty;
-                txtTema.Text = string.Empty;
-                dt.Clear();
-                dgvUmat.DataSource = null;
-                dgvUmat.Rows.Clear();
-            }
-            else
-            {
-                btnSimpan.Enabled = false;
-                iMessage.erBoxOk("Terjadi kesalahan sistem. Silakan hubungi Administrator Anda");
+            switch (pd.checkService(dtKebaktian.Value.Year.ToString(), dtKebaktian.Value.Month.ToString(), dtKebaktian.Value.Day.ToString())){
+                case "EDIT":
+                    editMode = true;
+                    headerId = pd.getHeaderId();
+                    txtPewarta.Text = pd.getPewarta();
+                    txtTema.Text = pd.getTitle();
+                    getData();
+                    break;
+                case "NEW":
+                    editMode = false;
+                    txtPewarta.Text = string.Empty;
+                    txtTema.Text = string.Empty;
+                    dt.Clear();
+                    dgvUmat.DataSource = null;
+                    dgvUmat.Rows.Clear();
+                    break;
+                default:
+                    btnSimpan.Enabled = false;
+                    iMessage.erBoxOk("Terjadi kesalahan sistem. Silakan hubungi Administrator Anda");
+                    break;
             }
             dtKebaktian.Enabled = false;
         }
@@ -99,20 +98,27 @@ namespace AbsensiJemaatDesk
         private void dgvUmat_CurrentCellDirtyStateChanged(object sender, EventArgs e) {
             if (dgvUmat.Rows.Count > 0)
             {
-                if (dgvUmat.IsCurrentCellDirty == false) {
-                    if (dgvUmat.CurrentRow.Cells[9].Value.Equals(true))
-                    {
-                        hadir = "1";
-                        pdTotal = pdTotal + 1;
-                    }
-                    else
-                    {
-                        hadir = "0";
-                        pdTotal = pdTotal - 1;
-                    }
+                if (dgvUmat.IsCurrentCellDirty == false)
+                {
+                    if (cellEdit != (bool)dgvUmat.CurrentRow.Cells[9].Value) {
+                        if (dgvUmat.CurrentRow.Cells[9].Value.Equals(true))
+                        {
+                            hadir = "1";
+                            pdTotal = pdTotal + 1;
+                        }
+                        else
+                        {
+                            hadir = "0";
+                            pdTotal = pdTotal - 1;
+                        }
 
-                    lbltotal.Text = "Total Jemaat : " + Convert.ToString(pdTotal);
-                    pd.editLines(dgvUmat.CurrentRow.Cells[0].Value.ToString(), hadir);
+                        lbltotal.Text = "Total Jemaat : " + Convert.ToString(pdTotal);
+                        pd.updateTotal(headerId, Convert.ToString(pdTotal));
+                        pd.editLines(dgvUmat.CurrentRow.Cells[0].Value.ToString(), hadir);
+                    }
+                }
+                else {
+                    cellEdit = (bool)dgvUmat.CurrentRow.Cells[9].Value;
                 }
             }
         }
@@ -163,6 +169,7 @@ namespace AbsensiJemaatDesk
                         if (pd.savePD(dtKebaktian.Value.ToString("yyyyMMdd"), dtKebaktian.Value.ToShortDateString(),
                                 txtTema.Text.Trim(), txtPewarta.Text.Trim()) == true)
                         {
+                            this.headerId = dtKebaktian.Value.ToString("yyyyMMdd");
                             getData();
                             headerSave = true;
                             tabControl1.SelectedIndex = 1;

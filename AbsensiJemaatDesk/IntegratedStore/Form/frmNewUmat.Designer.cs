@@ -193,6 +193,7 @@
             // 
             // cmbSosMed
             // 
+            this.cmbSosMed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSosMed.FormattingEnabled = true;
             this.cmbSosMed.Items.AddRange(new object[] {
             "Facebook",
@@ -234,6 +235,7 @@
             // 
             // cmbAgama
             // 
+            this.cmbAgama.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAgama.FormattingEnabled = true;
             this.cmbAgama.Items.AddRange(new object[] {
             "Buddha",

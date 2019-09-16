@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
+//using MySql.Data.MySqlClient;
 using System.Data.OleDb;
 
 namespace AbsensiJemaatDesk
@@ -41,37 +41,37 @@ namespace AbsensiJemaatDesk
             }
         }
 
-        public List<string> dbList()
-        {
-            List<string> dbList = new List<string>();
+        //public List<string> dbList()
+        //{
+        //    List<string> dbList = new List<string>();
 
-            try
-            {
-                conn.Open();
-                comm.Connection = conn;
-                comm.CommandText = "use information_schema; select schema_name as DAFTAR_DATABASE from schemata";
-                comm.CommandTimeout = 10000;
-                sdr = comm.ExecuteReader();
-                if (sdr.HasRows)
-                {
-                    while (sdr.Read())
-                    {
-                        dbList.Add(sdr.GetString(0));
-                    }
-                }
-            }
-            catch (MySqlException err)
-            {
-                iMessage.erBoxOk(err.Message);
-                iMessage.iBoxOk("Terjadi kesalahan sistem." + Environment.NewLine + "Harap hubungi Adminstrator Anda.");
-            }
-            finally
-            {
-                sdr.Close();
-                conn.Close();
-            }
+        //    try
+        //    {
+        //        conn.Open();
+        //        comm.Connection = conn;
+        //        comm.CommandText = "use information_schema; select schema_name as DAFTAR_DATABASE from schemata";
+        //        comm.CommandTimeout = 10000;
+        //        sdr = comm.ExecuteReader();
+        //        if (sdr.HasRows)
+        //        {
+        //            while (sdr.Read())
+        //            {
+        //                dbList.Add(sdr.GetString(0));
+        //            }
+        //        }
+        //    }
+        //    catch (MySqlException err)
+        //    {
+        //        iMessage.erBoxOk(err.Message);
+        //        iMessage.iBoxOk("Terjadi kesalahan sistem." + Environment.NewLine + "Harap hubungi Adminstrator Anda.");
+        //    }
+        //    finally
+        //    {
+        //        sdr.Close();
+        //        conn.Close();
+        //    }
 
-            return dbList;
-        }
+        //    return dbList;
+        //}
     }
 }

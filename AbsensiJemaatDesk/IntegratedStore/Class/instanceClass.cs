@@ -14,5 +14,8 @@ namespace AbsensiJemaatDesk
         public static frmUser user = new frmUser();
         public static frmUmat jem = new frmUmat();
         public static frmPD bakti = new frmPD();
+        public static rptPD rptPD = new rptPD();
+        public static rptBirthday rptBirth = new rptBirthday();
+        public static rptGraph rptGraph = new rptGraph();
     }
 }

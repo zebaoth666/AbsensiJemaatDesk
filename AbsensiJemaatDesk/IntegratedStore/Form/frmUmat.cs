@@ -328,7 +328,13 @@ namespace AbsensiJemaatDesk
                 txtTlpRmh.Text = dgvUmat.CurrentRow.Cells[5].Value.ToString();
                 txtHp.Text = dgvUmat.CurrentRow.Cells[6].Value.ToString();
                 txTempat.Text = dgvUmat.CurrentRow.Cells[7].Value.ToString();
-                dtLahirJemaat.Value = DateTime.Parse(dgvUmat.CurrentRow.Cells[8].Value.ToString());
+
+                if (String.IsNullOrEmpty(dgvUmat.CurrentRow.Cells[8].Value.ToString()))
+                {
+                    dtLahirJemaat.Value = new DateTime(1900, 01, 01);
+                }
+                else { dtLahirJemaat.Value = DateTime.Parse(dgvUmat.CurrentRow.Cells[8].Value.ToString()); }
+                
                 cmbAgama.Text = dgvUmat.CurrentRow.Cells[11].Value.ToString();
                 txtSibuk.Text = dgvUmat.CurrentRow.Cells[12].Value.ToString();
                 txtKomunitas.Text = dgvUmat.CurrentRow.Cells[13].Value.ToString();

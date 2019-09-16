@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data;
-using MySql.Data.MySqlClient;
 using System.Data.OleDb;
 
 namespace AbsensiJemaatDesk
@@ -235,19 +234,18 @@ namespace AbsensiJemaatDesk
             return next;
         }
 
-        public DataTable callRptUmat(String fields, String param)
+        public DataTable callRptUmat()
         {
             DataTable dt = new DataTable();
-
-            if (String.IsNullOrEmpty(fields)) { fields = "*"; }
-            if (!String.IsNullOrEmpty(param)) { param = " WHERE " + param; }
 
             try
             {
                 conn.Open();
                 comm.Connection = conn;
-                comm.CommandText = "SELECT " + fields + " FROM M_UMAT " + 
-                                    param + " ORDER BY UMAT_DATE_BIRTH, UMAT_COMP_NAME";
+                comm.CommandText = "SELECT FORMAT(UMAT_DATE_BIRTH,'dd MMM') AS TGLLAHIR," + 
+                                    " UMAT_COMP_NAME, DATEDIFF('yyyy', UMAT_DATE_BIRTH, NOW()) AS UMUR," +
+                                    " MONTH(UMAT_DATE_BIRTH) AS KBLN, DAY(UMAT_DATE_BIRTH) AS KTGL" +
+                                    " FROM M_UMAT ORDER BY MONTH(UMAT_DATE_BIRTH), DAY(UMAT_DATE_BIRTH), UMAT_COMP_NAME";
                 comm.CommandTimeout = 10000;
                 sda = new OleDbDataAdapter();
                 sda.SelectCommand = comm;

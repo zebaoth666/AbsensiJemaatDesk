@@ -268,7 +268,6 @@
             this.dgvUmat.Margin = new System.Windows.Forms.Padding(4);
             this.dgvUmat.MultiSelect = false;
             this.dgvUmat.Name = "dgvUmat";
-            this.dgvUmat.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUmat.Size = new System.Drawing.Size(908, 394);
             this.dgvUmat.TabIndex = 0;
             // 

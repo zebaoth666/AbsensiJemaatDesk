@@ -55,8 +55,8 @@ namespace AbsensiJemaatDesk
                 if (conn.testConn())
                 {
                     BindingSource bs = new BindingSource();
-                    bs.DataSource = conn.dbList();
-                    cmbDatabase.DataSource = bs;
+                  //  bs.DataSource = conn.dbList();
+                  //  cmbDatabase.DataSource = bs;
 
                     cmbDatabase.Enabled = true;
                     disableControl();

@@ -219,7 +219,7 @@
             this.dataMasterToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.dataMasterToolStripMenuItem.Name = "dataMasterToolStripMenuItem";
             this.dataMasterToolStripMenuItem.Size = new System.Drawing.Size(138, 30);
-            this.dataMasterToolStripMenuItem.Text = "Data &Jemaat";
+            this.dataMasterToolStripMenuItem.Text = "&Umat";
             this.dataMasterToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.dataMasterToolStripMenuItem.Click += new System.EventHandler(this.dataMasterToolStripMenuItem_Click);
             // 
@@ -268,7 +268,7 @@
             this.grafikKehadiranJemaatToolStripMenuItem.AutoSize = false;
             this.grafikKehadiranJemaatToolStripMenuItem.Name = "grafikKehadiranJemaatToolStripMenuItem";
             this.grafikKehadiranJemaatToolStripMenuItem.Size = new System.Drawing.Size(265, 30);
-            this.grafikKehadiranJemaatToolStripMenuItem.Text = "&Grafik Kehadiran Jemaat";
+            this.grafikKehadiranJemaatToolStripMenuItem.Text = "&Grafik Umat";
             this.grafikKehadiranJemaatToolStripMenuItem.Click += new System.EventHandler(this.grafikKehadiranJemaatToolStripMenuItem_Click);
             // 
             // timer1

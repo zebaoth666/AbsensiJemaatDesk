@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data;
-using MySql.Data.MySqlClient;
 using System.Data.OleDb;
 
 namespace AbsensiJemaatDesk

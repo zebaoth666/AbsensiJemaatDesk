@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.XtraReports.UI;
 
 namespace AbsensiJemaatDesk
 {
@@ -93,8 +92,11 @@ namespace AbsensiJemaatDesk
         {
             if (AbsensiJemaatDesk.Properties.Settings.Default.mdiParent == false)
             {
-                rptBirthday birth = new rptBirthday();
-                birth.ShowDialog();
+                instanceClass.rptBirth.MdiParent = this;
+                instanceClass.rptBirth.Dock = DockStyle.Fill;
+                instanceClass.rptBirth.Visible = true;
+
+                AbsensiJemaatDesk.Properties.Settings.Default.mdiParent = true;
             }
         }
 
@@ -102,17 +104,34 @@ namespace AbsensiJemaatDesk
         {
             if (AbsensiJemaatDesk.Properties.Settings.Default.mdiParent == false)
             {
-                rptPD pd = new rptPD();
-                pd.ShowDialog();
+                instanceClass.rptPD.MdiParent = this;
+                instanceClass.rptPD.Dock = DockStyle.Fill;
+                instanceClass.rptPD.Visible = true;
+
+                AbsensiJemaatDesk.Properties.Settings.Default.mdiParent = true;
             }
         }
 
         private void grafikKehadiranJemaatToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //rptUmatGraph graph = new rptUmatGraph();
-            //xRptUmatGraph graph = new xRptUmatGraph();
-            //graph.ShowDialog();
-            iMessage.iBoxOk("Sedang dalam pengembangan");
+            instanceClass.rptGraph.MdiParent = this;
+            instanceClass.rptGraph.Dock = DockStyle.Fill;
+            instanceClass.rptGraph.Visible = true;
+
+            AbsensiJemaatDesk.Properties.Settings.Default.mdiParent = true;
+
+            //iMessage.iBoxOk("Sedang dalam pengembangan");
+        }
+
+        public void initProgres(Int16 maxValue)
+        {
+            tsProgress.Value = 0;
+            tsProgress.Minimum = 0;
+            tsProgress.Maximum = maxValue;
+        }
+
+        public void setProgres() {
+            tsProgress.Value++;
         }
     }
 }
