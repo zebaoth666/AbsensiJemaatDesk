@@ -36,6 +36,8 @@ namespace AbsensiJemaatDesk
             dtAlpha = new DataTable();
             dvAlpha = new DataView();
             dtGlobal = pd.callPDGlobal();
+
+            //initDgvAlpha();
         }
 
         private void rptPD_VisibleChanged(object sender, EventArgs e) {
@@ -104,6 +106,22 @@ namespace AbsensiJemaatDesk
         /// //////////                                          Function                                         //////////
         /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        private void initDgvAlpha() {
+            dgvAlphaUmat.ColumnCount = 2;
+            dgvAlphaUmat.Columns[2].Name = "Nama Lengkap";
+            dgvAlphaUmat.Columns[3].Name = "Nama Panggilan";
+
+            DataGridViewCheckBoxColumn check = new DataGridViewCheckBoxColumn();
+            DataGridViewProgressColumn column = new DataGridViewProgressColumn();
+            
+            dgvAlphaUmat.Columns.Add(check);
+            dgvAlphaUmat.Columns.Add(column);
+
+            check.HeaderText = "Hapus";
+            check.Name = "Persentase";
+            dgvAlphaUmat.Columns[1].DisplayIndex = 3;
+        }
+
         private void getAlphaUmat() {
             //linq total_PD
             var resTotal = (from test in dtGlobal.AsEnumerable()
@@ -137,16 +155,24 @@ namespace AbsensiJemaatDesk
                 });
 
             var result = (from rT in resTotal
-                         from rAl in resAlpha
-                         where (rT.id == rAl.id)
-                         select new
-                         {
-                             rT.id, rT.nama, rT.alias, rAl.alpha, rT.total, persen = ((float)rAl.alpha/(float)rT.total)*100
-                         }
+                          from rAl in resAlpha
+                          where (rT.id == rAl.id)
+                          select new
+                          {
+                              rT.id, rT.nama, rT.alias, persen = ((float)rAl.alpha / (float)rT.total) * 100
+                          }
                          )
                          .ToList();
+            dtAlpha.Copy(result);
 
-            dgvAlphaUmat.DataSource = result;
+            for (int a = 0; a <= result.Count - 1; a++) {
+                dgvAlphaUmat.Rows.Add();
+                dgvAlphaUmat[3, a].Value = Convert.ToInt32(result[a].persen);
+                dgvAlphaUmat[1, a].Value = (result[a].nama);
+                dgvAlphaUmat[2, a].Value = (result[a].alias);
+            }
+
+            dgvAlphaUmat.SortOrder(dgvAlphaUmat.Columns)
         }
 
         private void exportToExcel() {

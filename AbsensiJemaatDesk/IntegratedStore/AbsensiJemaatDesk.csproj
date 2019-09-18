@@ -90,6 +90,7 @@
     <Compile Include="Class\encryptClass.cs" />
     <Compile Include="Class\pdClass.cs" />
     <Compile Include="Class\umatClass.cs" />
+    <Compile Include="Class\DataGridViewProgressColumn.cs" />
     <Compile Include="Form\rptGraph.cs">
       <SubType>Form</SubType>
     </Compile>

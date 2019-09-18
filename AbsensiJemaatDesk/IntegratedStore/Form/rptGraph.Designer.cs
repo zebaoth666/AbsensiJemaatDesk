@@ -39,9 +39,14 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabHadir = new System.Windows.Forms.TabPage();
             this.tabBuku = new System.Windows.Forms.TabPage();
+            this.tabClose = new System.Windows.Forms.TabPage();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.LblMenu = new System.Windows.Forms.Label();
-            this.tabClose = new System.Windows.Forms.TabPage();
+            this.dataGridViewProgressColumn1 = new AbsensiJemaatDesk.DataGridViewProgressColumn();
+            this.hapus = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.namaLengkap = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.namaAlias = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.persen = new AbsensiJemaatDesk.DataGridViewProgressColumn();
             this.tabAlpha.SuspendLayout();
             this.pnlAlphaMain.SuspendLayout();
             this.pnlAlphaData.SuspendLayout();
@@ -98,6 +103,11 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvAlphaUmat.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvAlphaUmat.ColumnHeadersHeight = 30;
+            this.dgvAlphaUmat.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.hapus,
+            this.namaLengkap,
+            this.namaAlias,
+            this.persen});
             this.dgvAlphaUmat.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAlphaUmat.Location = new System.Drawing.Point(0, 0);
             this.dgvAlphaUmat.Margin = new System.Windows.Forms.Padding(4);
@@ -152,6 +162,15 @@
             this.tabBuku.Text = "Buku Absen Umat";
             this.tabBuku.UseVisualStyleBackColor = true;
             // 
+            // tabClose
+            // 
+            this.tabClose.Location = new System.Drawing.Point(154, 4);
+            this.tabClose.Name = "tabClose";
+            this.tabClose.Size = new System.Drawing.Size(756, 437);
+            this.tabClose.TabIndex = 3;
+            this.tabClose.Text = "Tutup";
+            this.tabClose.UseVisualStyleBackColor = true;
+            // 
             // pnlMain
             // 
             this.pnlMain.Controls.Add(this.tabControl1);
@@ -176,14 +195,43 @@
             this.LblMenu.Text = "GRAFIK PD ST. YAKOBUS";
             this.LblMenu.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tabClose
+            // dataGridViewProgressColumn1
             // 
-            this.tabClose.Location = new System.Drawing.Point(154, 4);
-            this.tabClose.Name = "tabClose";
-            this.tabClose.Size = new System.Drawing.Size(756, 437);
-            this.tabClose.TabIndex = 3;
-            this.tabClose.Text = "Tutup";
-            this.tabClose.UseVisualStyleBackColor = true;
+            this.dataGridViewProgressColumn1.HeaderText = "Presentase";
+            this.dataGridViewProgressColumn1.Name = "dataGridViewProgressColumn1";
+            this.dataGridViewProgressColumn1.ReadOnly = true;
+            this.dataGridViewProgressColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewProgressColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dataGridViewProgressColumn1.Width = 133;
+            // 
+            // hapus
+            // 
+            this.hapus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.hapus.HeaderText = "Hapus";
+            this.hapus.Name = "hapus";
+            this.hapus.Width = 56;
+            // 
+            // namaLengkap
+            // 
+            this.namaLengkap.HeaderText = "NamaLengkap";
+            this.namaLengkap.Name = "namaLengkap";
+            this.namaLengkap.ReadOnly = true;
+            this.namaLengkap.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.namaLengkap.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // namaAlias
+            // 
+            this.namaAlias.HeaderText = "Nama Alias";
+            this.namaAlias.Name = "namaAlias";
+            this.namaAlias.ReadOnly = true;
+            // 
+            // persen
+            // 
+            this.persen.HeaderText = "Presentase";
+            this.persen.Name = "persen";
+            this.persen.ReadOnly = true;
+            this.persen.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.persen.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // rptGraph
             // 
@@ -223,5 +271,10 @@
         private System.Windows.Forms.Panel pnlAlphaData;
         private System.Windows.Forms.Panel pnlAlpahMenu;
         private System.Windows.Forms.TabPage tabClose;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn hapus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn namaLengkap;
+        private System.Windows.Forms.DataGridViewTextBoxColumn namaAlias;
+        private DataGridViewProgressColumn persen;
+        private DataGridViewProgressColumn dataGridViewProgressColumn1;
     }
 }
